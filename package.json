@@ -1,0 +1,23 @@
+{
+  "name": "nui-chatbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "hashtable": "2.0.2",
+    "pidusage-fork": "0.1.2",
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "heroku-client": "^3.0.2",
+    "request": "^2.71.0",
+	"underscore": "1.8.3"
+  },
+  "engines": {
+    "node": "6.11.1"
+  }
+}
