@@ -1,14 +1,12 @@
 
 <img src="https://raw.githubusercontent.com/ngxson/chatbot-cnh/master/readme/github_cover.png" width="100%">
 
-# Source code of Chatbot CNH
-
 ---
 ### Lời nói đầu
 
 Bonjour à tous, mình là Nui. Mình lập ra chatbot này với mục đích ban đầu là để thử thách bản thân, cũng như giúp mọi người có 1 nơi lành mạnh để giải tỏa tinh thần.
 
-Vì nó được làm từ lúc kinh nghiệm của mình còn ít ỏi, phong cách code sẽ khá xấu. Tuy nhiên, mình muốn tập trung nhiều vào việc tối ưu hóa, trong khi phải giảm tối đa chi phí hoạt động (thực tế mình chưa phải bỏ ra đồng nào để duy trì nó :D ). Đồng thời mình cũng đã thử nghiệm 1 vài phương pháp thống kê thông qua dữ liệu thu được. Điều này rất ý nghĩa với mình vì nó giúp mình có 1 cái nhìn tổng quát hơn về nhu cầu của người sử dụng.
+Vì nó được làm từ lúc kinh nghiệm của mình còn ít ỏi, phong cách code sẽ khá xấu. Tuy nhiên, mình muốn tập trung nhiều vào việc tối ưu hóa, trong khi phải giảm tối đa chi phí hoạt động (thực tế mình chưa phải bỏ ra đồng nào để duy trì nó :smiley: ). Đồng thời mình cũng đã thử nghiệm 1 vài phương pháp thống kê thông qua dữ liệu thu được. Điều này rất ý nghĩa với mình vì nó giúp mình có 1 cái nhìn tổng quát hơn về nhu cầu của người sử dụng.
 
 Chatbot CNH bị đóng không phải do vấn đề về tài chính hay kỹ thuật. Chỉ là mình đang bị khá nhiều áp lực từ các công việc cá nhân. Ngoài ra, mình cũng muốn tìm xem liệu có ai khác (ít nhất là trong CNH) có thể thực sự hiểu và đảm nhiệm được chatbot không.
 
@@ -46,6 +44,8 @@ Trong sơ đồ còn 1 vài phần mình chưa biểu diễn đc:
 ### Hướng dẫn cài đặt
 
 Các bạn hãy xem hướng dẫn kèm ảnh chi tiết tại đây: [click here](https://raw.githubusercontent.com/ngxson/chatbot-cnh/master/readme/1-TUT-CHATBOT-CNH.pdf)
+
+(Bạn nên in hướng dẫn này ra cho dễ nhìn, chỉ có 16 trang thôi mà :smiley: )
 
 ### Thanks to
 
