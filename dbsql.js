@@ -1,13 +1,15 @@
 module.exports = {
 	writeToWaitRoom: function (sqlconn, id, gender) {
 		var d = new Date();
-		sqlconn.query('INSERT INTO waitroom (uid, gender, time) VALUES ('+id+','+gender+','+d.getTime()+') ', function (err, results, fields) {
-			if(err) { console.log('__writeToWaitRoom error: ',err); }
-		});
+		sqlconn.query('INSERT INTO waitroom (uid, gender, time) VALUES (?,?,?) ',
+			[+id,gender,d.getTime()], function (err, results, fields) {
+				if(err) { console.log('__writeToWaitRoom error: ',err); }
+			}
+		);
 	},
 
 	findInWaitRoom: function (sqlconn, id, callback) {
-		sqlconn.query('SELECT uid,gender FROM waitroom WHERE uid='+id, function (err, results, fields) {
+		sqlconn.query('SELECT uid,gender FROM waitroom WHERE uid=?', [id], function (err, results, fields) {
 			if (err) {
 				console.log('__findInWaitRoom error: ',err);
 				callback(false);
@@ -20,7 +22,7 @@ module.exports = {
 	},
 
 	deleteFromWaitRoom: function (sqlconn, id) {
-		sqlconn.query('DELETE FROM waitroom WHERE uid='+id, function (err, results, fields) {
+		sqlconn.query('DELETE FROM waitroom WHERE uid=?', [id], function (err, results, fields) {
 			if(err) { console.log('__deleteFromWaitRoom error: ',err); }
 		});
 	},
@@ -45,18 +47,21 @@ module.exports = {
 	//chatroom tools
 	writeToChatRoom: function (sqlconn, fs, id1, id2, isWantedGender) {
 		var d = new Date();
+		var genderint = (isWantedGender ? 1 : 0);
 		sqlconn.query('INSERT INTO chatroom (id1, id2, starttime, char1, msg1, char2, msg2, genderok) '+
-						'VALUES ('+id1+','+id2+','+d.getTime()+',0,0,0,0,'+(isWantedGender ? '1' : '0')+')', function (err, results, fields) {
+						'VALUES (?,?,?,0,0,0,0,?)',
+						[id1,id2,d.getTime(),genderint],
+						function (err, results, fields) {
 			if(err) {
 				console.log('__writeToChatRoom error: ',err);
 			}
 		});
-		sqlconn.query('DELETE FROM game WHERE id='+id1+' OR id='+id2, function (err1, results1, fields1) {});//
+		//sqlconn.query('DELETE FROM game WHERE id=? OR id=?', [id1,id2], function (err1, results1, fields1) {});//
 	},
 
 	//callback(id, haveToReview, role, data);
 	findPartnerChatRoom: function (sqlconn, id, callback) {
-		sqlconn.query('SELECT id1,id2,msg1,msg2,gamedata,gamemode FROM chatroom WHERE id1='+id+' OR id2='+id, function (err, results, fields) {
+		sqlconn.query('SELECT id1,id2,msg1,msg2,gamedata,gamemode FROM chatroom WHERE id1=? OR id2=?', [id,id], function (err, results, fields) {
 			if (err) {
 				console.log('__findPartnerChatRoom error: ',err);
 				//callback(null, false);
@@ -75,8 +80,8 @@ module.exports = {
 	},
 
 	deleteFromChatRoom: function (sqlconn, id, callback) {
-		sqlconn.query('SELECT * FROM chatroom WHERE id1='+id+' OR id2='+id, function (err, results, fields) {
-			sqlconn.query('DELETE FROM chatroom WHERE id1='+id+' OR id2='+id, function (err1, results1, fields1) {});
+		sqlconn.query('SELECT * FROM chatroom WHERE id1=? OR id2=?', [id,id], function (err, results, fields) {
+			sqlconn.query('DELETE FROM chatroom WHERE id1=? OR id2=?', [id,id], function (err1, results1, fields1) {});
 			if (!err && results[0])
 				callback(results[0]);
 		});

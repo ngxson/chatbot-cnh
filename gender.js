@@ -10,9 +10,9 @@ var setGender = function (sqlconn, id, gender_str, callback) {
 		callback(-1, id);//no valid value
 		return;
 	}
-	sqlconn.query('INSERT INTO gender (uid, gender) VALUES ('+id+', '+genderid+') '+
+	sqlconn.query('INSERT INTO gender (uid, gender) VALUES (?,?) '+
 					'ON DUPLICATE KEY UPDATE '+
-					'gender=VALUES(gender)', function (error, results, fields) {
+					'gender=VALUES(gender)', [id, genderid], function (error, results, fields) {
 		if (error) {
 			callback(-2, id);//ERR writing to db
 			console.log(error);
@@ -35,7 +35,7 @@ var getGender = function (sqlconn, id, callback, facebook, token) {
 			} else {
 				//callback(0);
 				//////////////// if not found, fetch from facebook ////////////////
-				facebook.getFbData(token, '/v2.6/'+id, function(data){
+				facebook.getFbData(token, '/'+id, function(data){
 					//console.log(data);
 					if (!data.gender) {
 						setGender(sqlconn, id, "doituongkhong", function(ret,id){});
