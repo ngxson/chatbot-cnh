@@ -37,12 +37,9 @@ function handleDisconnect() {
   sqlconn.on('error', function(err) {
     if (!err.fatal) {return;}
     if (err.code !== 'PROTOCOL_CONNECTION_LOST') {throw err;}
-    console.log('Re-connecting MySQL');
+    //console.log('Re-connecting MySQL');
     sqlconn = mysql.createConnection(co.DB_CONFIG);
     handleDisconnect();
-    sqlconn.connect(function(err) {
-      tools.init(sqlconn);
-    });
   });
 }
 
@@ -241,7 +238,7 @@ function findPair(id, mygender) {
 }
 
 function dontChooseGender(isPriority) {
-	if (isPriority) return (Math.random() > 0.5);
+	if (isPriority) return (Math.random() > 0.6);
 	else return (Math.random() > 0.9);
 }
 
