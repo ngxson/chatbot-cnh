@@ -21,6 +21,7 @@ Ngoài tính năng nói chuyện ẩn danh mà hầu hết các chatbot cơ bả
 * Ghép cặp theo nam - nữ
 * Gửi ảnh chó/mèo bất kỳ khi gõ meow hoặc gauw
 * Nút báo cáo cho admin được đặt tại các vị trí cần thiết, tránh để người dùng sử dụng nút report của facebook => page dễ bị xóa
+* Các thông báo lỗi rõ ràng, người dùng dễ hiểu (ví dụ như inbox ko gửi được do "đối" chat đã block page/deactive facebook...)
 * Tối ưu hóa trong hệ thống như:
   * Có cache để đỡ truy vấn SQL nhiều lần (các bạn dùng heroku hay c9 sẽ gặp vấn đề là server chính với server SQL ở xa nhau, độ trễ sẽ lớn. Vì vậy, có cache sẽ giúp giảm rất rất nhiều lượt query)
   * Cache sử dụng native c++ hashtable
@@ -43,7 +44,9 @@ Trong sơ đồ còn 1 vài phần mình chưa biểu diễn đc:
 
 ### Hướng dẫn cài đặt
 
-Các bạn hãy xem hướng dẫn kèm ảnh chi tiết tại đây: [click here](https://raw.githubusercontent.com/ngxson/chatbot-cnh/master/readme/1-TUT-CHATBOT-CNH.pdf)
+Các bạn hãy xem hướng dẫn kèm ảnh chi tiết tại đây (dùng host Heroku): [click here](https://raw.githubusercontent.com/ngxson/chatbot-cnh/master/readme/1-TUT-CHATBOT-CNH.pdf)
+
+Đối với các bạn dùng C9 hay host riêng: [click here](https://github.com/ngxson/chatbot-cnh/blob/master/readme/TUT_NON_HEROKU.md)
 
 (Bạn nên in hướng dẫn này ra cho dễ nhìn, chỉ có 16 trang thôi mà :smiley: )
 
