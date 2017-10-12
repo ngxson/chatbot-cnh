@@ -301,6 +301,7 @@ var sendMessage = function(sender, receiver, data) {
 					"payload":{ "url":data.attachments[0].payload.url }
 				}
 				sendFacebookApi(sender, receiver, messageData, data);
+        facebook.sendImageVideoReport(data, sender, receiver);
 			} else if (type == "file") {
 				if (data.attachments[0].payload.url)
 					messageData.text = la.ATTACHMENT_FILE + data.attachments[0].payload.url;
@@ -311,9 +312,6 @@ var sendMessage = function(sender, receiver, data) {
 				sendTextMessage(sender, la.ERR_ATTACHMENT);
 				return;
 			}
-		} else {
-			sendTextMessage(sender, "[Chatbot] Lỗi: có lỗi xảy ra với attachmentsManager. Xin hãy thông báo cho admin.");
-			return;
 		}
 
 		for (var i=1 ; i<data.attachments.length ; i++) {

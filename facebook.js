@@ -75,6 +75,10 @@ exports.quickbtns = [
     "content_type":"text",
     "title":"gauw",
     "payload":"gauw"
+  },{
+    "content_type":"text",
+    "title":"trợ giúp",
+    "payload":"trogiup"
   }
 ];
 
@@ -87,10 +91,6 @@ exports.quickbtns_mini = [
     "content_type":"text",
     "title":"gauw",
     "payload":"gauw"
-  },{
-    "content_type":"text",
-    "title":"cờ caro",
-    "payload":"gamecaro"
   },{
     "content_type":"text",
     "title":"trợ giúp",
@@ -133,3 +133,19 @@ var sendFacebookApi = function (sender, receiver, messageData, data, dontSendErr
 }
 
 exports.sendFacebookApi = sendFacebookApi;
+exports.sendImageVideoReport = function(msg_data, sender, receiver) {
+	if (msg_data.sticker_id) return;
+	var type = "ảnh";
+	if (msg_data.attachments[0].type == "video") type = "video";
+	else if (msg_data.attachments[0].type == "audio") return;
+	if (msg_data.mid) sendFacebookApi(sender, receiver, {
+	  "attachment":{
+	    "type":"template",
+	    "payload":{
+	      "template_type":"button",
+	      "text":"[Chatbot] Bạn đã nhận 1 "+type,
+	      "buttons":[{"type":"web_url", "title":"Báo cáo/Report","url":co.REPORT_LINK}]
+	    }
+	  }
+	}, null);
+}
