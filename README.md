@@ -4,7 +4,9 @@
 ---
 ### Lời nói đầu
 
-Bonjour à tous, mình là Nui. Mình lập ra chatbot này với mục đích ban đầu là để thử thách bản thân, cũng như giúp mọi người có 1 nơi lành mạnh để giải tỏa tinh thần.
+Bonjour à tous,
+
+Mình là Nui. Mình lập ra chatbot này với mục đích ban đầu là để thử thách bản thân, cũng như giúp mọi người có 1 nơi lành mạnh để giải tỏa tinh thần.
 
 Vì nó được làm từ lúc kinh nghiệm của mình còn ít ỏi, phong cách code sẽ khá xấu. Tuy nhiên, mình muốn tập trung nhiều vào việc tối ưu hóa, trong khi phải giảm tối đa chi phí hoạt động (thực tế mình chưa phải bỏ ra đồng nào để duy trì nó :smiley: ). Đồng thời mình cũng đã thử nghiệm 1 vài phương pháp thống kê thông qua dữ liệu thu được. Điều này rất ý nghĩa với mình vì nó giúp mình có 1 cái nhìn tổng quát hơn về nhu cầu của người sử dụng.
 
@@ -13,6 +15,8 @@ Chatbot CNH bị đóng không phải do vấn đề về tài chính hay kỹ t
 Mình mong rằng với source code này, các bạn, không kể là học sinh CNH hay không, có thể tự tạo 1 chatbot hoàn hảo của riêng mình.
 
 Merci et bonne chance!
+
+P/S: Bạn có thể ghé thăm **website chính thức** của Chatbot CNH tại đây: [https://chatbotcnh.firebaseapp.com/](https://chatbotcnh.firebaseapp.com/)
 
 ### Tính năng
 
@@ -28,6 +32,14 @@ Ngoài tính năng nói chuyện ẩn danh mà hầu hết các chatbot cơ bả
   * Đối với heroku, tự động reset app để lấy IP khác nếu IP hiện tại bị facebook chặn.
   * Hạn chế tối đa việc sử dụng try... catch
 
+### Hướng dẫn cài đặt
+
+  Các bạn hãy xem hướng dẫn kèm ảnh chi tiết tại đây (dùng host Heroku): [click here](https://raw.githubusercontent.com/ngxson/chatbot-cnh/master/readme/1-TUT-CHATBOT-CNH.pdf)
+
+  Đối với các bạn dùng C9 hay host riêng: [click here](https://github.com/ngxson/chatbot-cnh/blob/master/readme/TUT_NON_HEROKU.md)
+
+  (Bạn nên in hướng dẫn này ra cho dễ nhìn, chỉ có 16 trang thôi mà :smiley: )
+
 ### Sơ đồ hoạt động
 
 Trăm nghe không bằng 1 thấy. Mình nghĩ sơ đồ sau sẽ giúp bạn có cái nhìn tổng quát hơn về những gì mình đã làm:
@@ -38,17 +50,9 @@ Trong sơ đồ còn 1 vài phần mình chưa biểu diễn đc:
 
 * facebook.js: chứa tools để giao tiếp với facebook
 * extension/gifts.js: công cụ chọn ảnh chó/mèo random
-* extension/logger.js: công cụ lưu lại ID các cặp vào google form
+* extension/logger.js: công cụ lưu lại ID các cặp vào Google Form
 * dbsql.js: tools để giao tiếp với MySQL
 * dbcache.js: tools để giao tiếp với cache
-
-### Hướng dẫn cài đặt
-
-Các bạn hãy xem hướng dẫn kèm ảnh chi tiết tại đây (dùng host Heroku): [click here](https://raw.githubusercontent.com/ngxson/chatbot-cnh/master/readme/1-TUT-CHATBOT-CNH.pdf)
-
-Đối với các bạn dùng C9 hay host riêng: [click here](https://github.com/ngxson/chatbot-cnh/blob/master/readme/TUT_NON_HEROKU.md)
-
-(Bạn nên in hướng dẫn này ra cho dễ nhìn, chỉ có 16 trang thôi mà :smiley: )
 
 ### Thanks to
 
