@@ -17,7 +17,6 @@ const co = require('./custom/const');
 const tools = require('./dbtools');
 const gendertool = require('./gender');
 const facebook = require('./facebook');
-const report = require('./report');
 
 //extensions
 const gifts = require('./extension/gifts');
