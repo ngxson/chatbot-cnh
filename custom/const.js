@@ -24,7 +24,7 @@ module.exports = {
 	POST_LOG_ENTRY2 : '',
 
 	//GOOGLE FORMS
-	REPORT_LINK : "",
+	REPORT_LINK : "https://goo.gl/forms/FlqtshjdI9bMesSN2",
 
 	//other
 	MAX_PEOPLE_WAITROOM : 7
