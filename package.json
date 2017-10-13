@@ -15,7 +15,9 @@
     "express": "^4.13.4",
     "heroku-client": "^3.0.2",
     "request": "^2.71.0",
-	"underscore": "1.8.3"
+	"underscore": "1.8.3",
+	"mysql": "2.15.0",
+	"cors": "2.8.4"
   },
   "engines": {
     "node": "6.11.1"
