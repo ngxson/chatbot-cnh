@@ -40,6 +40,8 @@ Ngoài tính năng nói chuyện ẩn danh mà hầu hết các chatbot cơ bả
 
   (Bạn nên in hướng dẫn này ra cho dễ nhìn, chỉ có 16 trang thôi mà :smiley: )
 
+  **UPDATE** Hãy tham gia group để báo lỗi cũng như nhận các bản cập nhật trong tương lai: [click here](https://www.facebook.com/groups/857516637754308)
+
 ### Sơ đồ hoạt động
 
 Trăm nghe không bằng 1 thấy. Mình nghĩ sơ đồ sau sẽ giúp bạn có cái nhìn tổng quát hơn về những gì mình đã làm:
