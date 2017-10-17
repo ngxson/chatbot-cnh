@@ -21,6 +21,8 @@ const facebook = require('./facebook');
 //extensions
 const gifts = require('./extension/gifts');
 const logger = require('./extension/logger');
+const admin = require('./extension/admin');
+const cronjob = require('./extension/cronjob');
 
 const token = co.FB_PAGE_ACCESS_TOKEN;
 var sendFacebookApi = facebook.sendFacebookApi;
@@ -70,6 +72,7 @@ app.post('/webhook/', function (req, res) {
 	for (var i = 0; i < messaging_events.length; i++) {
 		var event = messaging_events[i]
 		//console.log(event);
+    if (event.read) event.message = {text:""};
 		//if (event.message.attachments) console.log(event.message.attachments[0]);
 		var sender = event.sender.id;
 		if (event.postback) if (event.postback.payload) event['message'] = {"text" : event.postback.payload};
@@ -114,7 +117,7 @@ app.post('/webhook/', function (req, res) {
 							gifts.sendCatPic(sender, null, true);
 						} else if (command === la.KEYWORD_DOG) {
 							gifts.sendDogPic(sender, null, true);
-						} else {
+						} else if (!event.read) {
 							sendButtonMsg(sender, la.HUONG_DAN, true, true);
 						}
 					}
@@ -130,7 +133,7 @@ app.post('/webhook/', function (req, res) {
 							gifts.sendCatPic(sender, null, true);
 						} else if (command === la.KEYWORD_DOG) {
 							gifts.sendDogPic(sender, null, true);
-						} else {
+						} else if (!event.read) {
 							sendButtonMsg(sender, la.WAITING, false, true);
 						}
 					}
@@ -150,7 +153,9 @@ app.post('/webhook/', function (req, res) {
 							sendMessage(sender, sender2, event.message);
 							gifts.sendDogPic(sender, sender2, false);
 						} else {
-							if (text.substring(0,8).toLowerCase() === '[chatbot') {
+              if (event.read) {
+                facebook.sendSeenIndicator(sender2);
+              } else if (text.substring(0,8).toLowerCase() === '[chatbot') {
 								sendTextMessage(sender, la.ERR_FAKE_MSG);
 							} else {
                 sendMessage(sender, sender2, event.message);
@@ -326,6 +331,9 @@ var sendMessage = function(sender, receiver, data) {
 		sendFacebookApi(sender, receiver, messageData, data);
 	}
 }
+
+admin.init(app, tools, sqlconn);
+cronjob.init(tools, sqlconn, sendButtonMsg);
 
 app.listen(app.get('port'), function() {
 	console.log('running on port', app.get('port'))

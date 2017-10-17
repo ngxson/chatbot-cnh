@@ -23,14 +23,19 @@ exports.getFbData = function(accessToken, apiPath, callback) {
             buffer += chunk;
         });
 
-        result.on('end', function(){
-            callback(JSON.parse(buffer));
+        result.on('end', function() {
+            try {
+              var data = JSON.parse(buffer);
+              callback(data);
+            } catch (e) {
+              callback({error:true});
+            }
         });
     });
 
     request.on('error', function(e){
         console.log('error from facebook.getFbData: ' + e.message);
-		callback({"error":"oui"});
+		    callback({"error":"oui"});
     });
 
     request.end();
@@ -130,6 +135,18 @@ var sendFacebookApi = function (sender, receiver, messageData, data, dontSendErr
 		console.log("__sendMessage: err: neither text nor attachment");
 		console.log(messageData);
 	}
+}
+
+exports.sendSeenIndicator = function (receiver) {
+  request({
+    url: 'https://graph.facebook.com/v2.6/me/messages',
+    qs: {access_token:co.FB_PAGE_ACCESS_TOKEN},
+    method: 'POST',
+    json: {
+      recipient: {id:receiver},
+      sender_action:"mark_seen"
+    }
+  }, function(error, response, body) {})
 }
 
 exports.sendFacebookApi = sendFacebookApi;

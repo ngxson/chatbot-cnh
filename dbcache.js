@@ -33,7 +33,7 @@ var wr_del = function(id) {
 }
 
 var wr_read = function(callback) {
-	var ids = []; var genders = [];
+	var ids = []; var genders = []; var time = [];
 	var db = shuffle(waitroom.keys());
 	/*db.sort(function(a,b) {
 		if (waitroom[a].time > waitroom[b].time) return 1;
@@ -42,9 +42,11 @@ var wr_read = function(callback) {
 	});*/
 	for (var i=0 ; i<db.length ; i++) {
 		ids.push(db[i]);
-		genders.push(waitroom.get(db[i]).gender);
+		var temp = waitroom.get(db[i]);
+		genders.push(temp.gender);
+		time.push(temp.time);
 	}
-	callback(ids, genders);
+	callback(ids, genders, time);
 }
 
 var cr_write = function(id1, id2, isWantedGender, starttime) {

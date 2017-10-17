@@ -26,6 +26,12 @@ module.exports = {
 	//GOOGLE FORMS
 	REPORT_LINK : "https://goo.gl/forms/FlqtshjdI9bMesSN2",
 
-	//other
-	MAX_PEOPLE_WAITROOM : 7
+	//OTHERS
+	//(không bắt buộc) Cách bật tính năng hiện đã xem (seen): https://goo.gl/xjw9nP
+	MAX_PEOPLE_WAITROOM : 7, //Số người tối đa trong phòng chờ
+	MAX_WAIT_TIME_MINUTES : 60, //Số phút tối đa 1 người đc phép trong phòng chờ.
+	                            //Đặt 0 để cho phép đợi bao lâu cũng đc
+
+	//ADMIN UI
+	ADMIN_PASSWORD : "" //password để login vào trang admin
 };
