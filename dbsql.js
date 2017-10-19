@@ -1,6 +1,6 @@
 var writeToWaitRoom = function (sqlconn, id, gender) {
 	var d = new Date();
-	sqlconn.query('INSERT INTO waitroom (uid, gender, time) VALUES (?,?,?) ',
+	sqlconn.conn.query('INSERT INTO waitroom (uid, gender, time) VALUES (?,?,?) ',
 		[+id,gender,d.getTime()], function (err, results, fields) {
 			if(err) {
 				console.log('__writeToWaitRoom error: ',err);
@@ -11,7 +11,7 @@ var writeToWaitRoom = function (sqlconn, id, gender) {
 }
 
 var findInWaitRoom = function (sqlconn, id, callback) {
-	sqlconn.query('SELECT uid,gender FROM waitroom WHERE uid=?', [id], function (err, results, fields) {
+	sqlconn.conn.query('SELECT uid,gender FROM waitroom WHERE uid=?', [id], function (err, results, fields) {
 		if (err) {
 			console.log('__findInWaitRoom error: ',err);
 			callback(false);
@@ -24,7 +24,7 @@ var findInWaitRoom = function (sqlconn, id, callback) {
 }
 
 var deleteFromWaitRoom = function (sqlconn, id) {
-	sqlconn.query('DELETE FROM waitroom WHERE uid=?', [id], function (err, results, fields) {
+	sqlconn.conn.query('DELETE FROM waitroom WHERE uid=?', [id], function (err, results, fields) {
 		if(err) {
 			console.log('__deleteFromWaitRoom error: ',err);
 			setTimeout(function(){deleteFromWaitRoom(sqlconn, id)}, 1000);
@@ -33,7 +33,7 @@ var deleteFromWaitRoom = function (sqlconn, id) {
 }
 
 var getListWaitRoom = function (sqlconn, callback) {
-	sqlconn.query('SELECT uid,gender,time FROM waitroom ORDER BY RAND()', function (err, results, fields) {
+	sqlconn.conn.query('SELECT uid,gender,time FROM waitroom ORDER BY RAND()', function (err, results, fields) {
 		if (err) {
 			console.log('__getListWaitRoom error: ',err);
 			callback([],[]);
@@ -55,7 +55,7 @@ var getListWaitRoom = function (sqlconn, callback) {
 var writeToChatRoom = function (sqlconn, fs, id1, id2, isWantedGender) {
 	var d = new Date();
 	var genderint = (isWantedGender ? 1 : 0);
-	sqlconn.query('INSERT INTO chatroom (id1, id2, starttime, char1, msg1, char2, msg2, genderok) '+
+	sqlconn.conn.query('INSERT INTO chatroom (id1, id2, starttime, char1, msg1, char2, msg2, genderok) '+
 					'VALUES (?,?,?,0,0,0,0,?)',
 					[id1,id2,d.getTime(),genderint],
 					function (err, results, fields) {
@@ -69,7 +69,7 @@ var writeToChatRoom = function (sqlconn, fs, id1, id2, isWantedGender) {
 
 //callback(id, haveToReview, role, data);
 var findPartnerChatRoom = function (sqlconn, id, callback) {
-	sqlconn.query('SELECT id1,id2,msg1,msg2,gamedata,gamemode FROM chatroom WHERE id1=? OR id2=?', [id,id], function (err, results, fields) {
+	sqlconn.conn.query('SELECT id1,id2,msg1,msg2,gamedata,gamemode FROM chatroom WHERE id1=? OR id2=?', [id,id], function (err, results, fields) {
 		if (err) {
 			console.log('__findPartnerChatRoom error: ',err);
 			setTimeout(function(){findPartnerChatRoom(sqlconn, id, callback)}, 1000);
@@ -89,8 +89,8 @@ var findPartnerChatRoom = function (sqlconn, id, callback) {
 }
 
 var deleteFromChatRoom = function (sqlconn, id, callback) {
-	sqlconn.query('SELECT * FROM chatroom WHERE id1=? OR id2=?', [id,id], function (err, results, fields) {
-		sqlconn.query('DELETE FROM chatroom WHERE id1=? OR id2=?', [id,id], function (err1, results1, fields1) {});
+	sqlconn.conn.query('SELECT * FROM chatroom WHERE id1=? OR id2=?', [id,id], function (err, results, fields) {
+		sqlconn.conn.query('DELETE FROM chatroom WHERE id1=? OR id2=?', [id,id], function (err1, results1, fields1) {});
 		if (!err && results[0])
 			callback(results[0]);
 		if (err) {
@@ -100,7 +100,7 @@ var deleteFromChatRoom = function (sqlconn, id, callback) {
 }
 
 var getListChatRoom = function (sqlconn, callback) {
-	sqlconn.query('SELECT id1,id2,starttime FROM chatroom', function (err, results, fields) {
+	sqlconn.conn.query('SELECT id1,id2,starttime FROM chatroom', function (err, results, fields) {
 		if (err) {
 			console.log('__getListChatRoom error: ',err);
 			setTimeout(function(){deleteFromChatRoom(sqlconn, callback)}, 1000);

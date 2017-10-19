@@ -29,12 +29,12 @@ module.exports = {
 				"- meow: Xem ảnh mèo\n"+
 				"- gauw: Xem ảnh cún\n"+
 				"\nCác lệnh có thể dùng khi đang không chat:\n"+
-				"- doituong nu: Giới tính muốn được chat cùng là nữ\n"+
-				"- doituong nam: Giới tính muốn được chat cùng là nam",
+				"- tim nu: Tìm nữ chat cùng\n"+
+				"- tim nam: Tìm nam chat cùng",
 
 	KEYWORD_BATDAU : 'batdau',
 	KEYWORD_KETTHUC : 'ketthuc',
-	KEYWORD_GENDER : 'doituong',
+	KEYWORD_GENDER : 'tim',
 	KEYWORD_HELP : 'trogiup',
 	KEYWORD_CAT : 'meow',
 	KEYWORD_DOG : 'gauw',

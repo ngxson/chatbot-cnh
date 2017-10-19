@@ -1,16 +1,18 @@
+const la = require('./custom/lang');
+
 var setGender = function (sqlconn, id, gender_str, callback) {
 	var genderid = 0;
-	if (gender_str == 'doituongnam') {
+	if (gender_str == la.KEYWORD_GENDER+'nam') {
 		genderid = 1;
-	} else if (gender_str == 'doituongnu') {
+	} else if (gender_str == la.KEYWORD_GENDER+'nu') {
 		genderid = 2;
-	} else if (gender_str == 'doituongkhong') {
+	} else if (gender_str == la.KEYWORD_GENDER+'khong') {
 		genderid = 0;
 	} else {
 		callback(-1, id);//no valid value
 		return;
 	}
-	sqlconn.query('INSERT INTO gender (uid, gender) VALUES (?,?) '+
+	sqlconn.conn.query('INSERT INTO gender (uid, gender) VALUES (?,?) '+
 					'ON DUPLICATE KEY UPDATE '+
 					'gender=VALUES(gender)', [id, genderid], function (error, results, fields) {
 		if (error) {
@@ -23,7 +25,7 @@ var setGender = function (sqlconn, id, gender_str, callback) {
 };
 
 var getGender = function (sqlconn, id, callback, facebook, token) {
-	sqlconn.query('SELECT uid,gender FROM gender WHERE uid='+id, function (error, results, fields) {
+	sqlconn.conn.query('SELECT uid,gender FROM gender WHERE uid='+id, function (error, results, fields) {
 		if (error) {
 			//callback(-1);//ERR reading to db
 			callback(0);
@@ -38,13 +40,13 @@ var getGender = function (sqlconn, id, callback, facebook, token) {
 				facebook.getFbData(token, '/'+id, function(data){
 					//console.log(data);
 					if (!data.gender) {
-						setGender(sqlconn, id, "doituongkhong", function(ret,id){});
+						setGender(sqlconn, id, la.KEYWORD_GENDER+"khong", function(ret,id){});
 						callback(0);
 					} else if (data.gender == "male") {
-						setGender(sqlconn, id, "doituongnu", function(ret,id){});
+						setGender(sqlconn, id, la.KEYWORD_GENDER+"nu", function(ret,id){});
 						callback(2);
 					} else if (data.gender == "female")  {
-						setGender(sqlconn, id, "doituongnam", function(ret,id){});
+						setGender(sqlconn, id, la.KEYWORD_GENDER+"nam", function(ret,id){});
 						callback(1);
 					}
 				});

@@ -102,7 +102,7 @@ var cr_read = function(callback) {
 }
 
 var fetchToCache = function(sqlconn, callback) {
-	sqlconn.query('SELECT id1,id2,starttime,genderok FROM chatroom', function (err, results) {
+	sqlconn.conn.query('SELECT id1,id2,starttime,genderok FROM chatroom', function (err, results) {
 		if (err) {
 			console.log(err);
 			callback(false);
@@ -110,7 +110,7 @@ var fetchToCache = function(sqlconn, callback) {
 			results.forEach(function(item, index) {
 				cr_write(item.id1, item.id2, item.genderok, item.starttime);
 			});
-			sqlconn.query('SELECT uid,gender,time FROM waitroom', function (err1, results1) {
+			sqlconn.conn.query('SELECT uid,gender,time FROM waitroom', function (err1, results1) {
 				if (err1) {
 					console.log(err1);
 					callback(false);

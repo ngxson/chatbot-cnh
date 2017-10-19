@@ -29,17 +29,21 @@ var sendFacebookApi = facebook.sendFacebookApi;
 
 var MAINTAINING = false;
 
-var sqlconn = mysql.createConnection(co.DB_CONFIG);
+var sqlconn = {
+  conn: new mysql.createConnection(co.DB_CONFIG)
+}
 handleDisconnect();
-sqlconn.connect(function(err) {
+sqlconn.conn.connect(function(err) {
   tools.init(sqlconn);
 });
 function handleDisconnect() {
-  sqlconn.on('error', function(err) {
+  sqlconn.conn.on('error', function(err) {
     if (!err.fatal) {return;}
-    if (err.code !== 'PROTOCOL_CONNECTION_LOST') {throw err;}
-    //console.log('Re-connecting MySQL');
-    sqlconn = mysql.createConnection(co.DB_CONFIG);
+    if (err.code !== 'PROTOCOL_CONNECTION_LOST' &&
+        err.code !== 'PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR') {throw err;}
+    console.log('Re-connecting MySQL');
+    sqlconn.conn.end();
+    sqlconn.conn = new mysql.createConnection(co.DB_CONFIG);
     handleDisconnect();
   });
 }
@@ -109,7 +113,7 @@ app.post('/webhook/', function (req, res) {
 							gendertool.getGender(sqlconn, sender, function(genderid) {
 							    findPair(sender, genderid);
 							}, facebook, token);
-						} else if (command.substring(0,8) === la.KEYWORD_GENDER) {
+						} else if (command.startsWith(la.KEYWORD_GENDER)) {
 							gendertool.setGender(sqlconn, sender, command, genderWriteCallback);
 						} else if (command === la.KEYWORD_HELP) {
 							sendButtonMsg(sender, la.HELP_TXT, true, false);
@@ -196,7 +200,7 @@ function genderWriteCallback(ret, id) {
 			break;
 		default:
 			sendTextMessage(id, la.GENDER_WRITE_OK+la.GENDER_ARR[ret]+la.GENDER_WRITE_WARN);
-			sendButtonMsg(id, la.HUONG_DAN, true, true);
+			findPair(id, ret);
 	}
 }
 
@@ -242,7 +246,7 @@ function findPair(id, mygender) {
 }
 
 function dontChooseGender(isPriority) {
-	if (isPriority) return (Math.random() > 0.6);
+	if (isPriority) return (Math.random() > 0.4);
 	else return (Math.random() > 0.9);
 }
 

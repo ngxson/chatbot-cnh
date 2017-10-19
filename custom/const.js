@@ -14,7 +14,9 @@ module.exports = {
 		host     : '',
 		user     : '',
 		password : '',
-		database : ''
+		database : '',
+		waitForConnection: true,
+		connectionLimit: 1
 	},
 
 	//ANALYTICS

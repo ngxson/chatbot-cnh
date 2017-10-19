@@ -1,5 +1,6 @@
 var https = require('https');
 var co = require('./custom/const');
+const la = require('./custom/lang');
 const request = require('request');
 var heroku = null;
 
@@ -67,23 +68,23 @@ exports.quickbtns = [
   {
     "content_type":"text",
     "title":"tìm nam",
-    "payload":"doituongnam"
+    "payload":la.KEYWORD_GENDER+'nam'
   },{
     "content_type":"text",
     "title":"tìm nữ",
-    "payload":"doituongnu"
+    "payload":la.KEYWORD_GENDER+'nu'
   },{
     "content_type":"text",
     "title":"meow",
-    "payload":"meow"
+    "payload":la.KEYWORD_CAT
   },{
     "content_type":"text",
     "title":"gauw",
-    "payload":"gauw"
+    "payload":la.KEYWORD_DOG
   },{
     "content_type":"text",
     "title":"trợ giúp",
-    "payload":"trogiup"
+    "payload":la.KEYWORD_HELP
   }
 ];
 
@@ -91,15 +92,15 @@ exports.quickbtns_mini = [
   {
     "content_type":"text",
     "title":"meow",
-    "payload":"meow"
+    "payload":la.KEYWORD_CAT
   },{
     "content_type":"text",
     "title":"gauw",
-    "payload":"gauw"
+    "payload":la.KEYWORD_DOG
   },{
     "content_type":"text",
     "title":"trợ giúp",
-    "payload":"trogiup"
+    "payload":la.KEYWORD_HELP
   }
 ];
 
