@@ -1,6 +1,7 @@
 var writeToWaitRoom = function (sqlconn, id, gender) {
 	var d = new Date();
-	sqlconn.conn.query('INSERT INTO waitroom (uid, gender, time) VALUES (?,?,?) ',
+	sqlconn.conn.query('INSERT INTO waitroom (uid, gender, time) VALUES (?,?,?) '+
+		'ON DUPLICATE KEY UPDATE time=VALUES(time)',
 		[+id,gender,d.getTime()], function (err, results, fields) {
 			if(err) {
 				console.log('__writeToWaitRoom error: ',err);
@@ -56,7 +57,8 @@ var writeToChatRoom = function (sqlconn, fs, id1, id2, isWantedGender) {
 	var d = new Date();
 	var genderint = (isWantedGender ? 1 : 0);
 	sqlconn.conn.query('INSERT INTO chatroom (id1, id2, starttime, char1, msg1, char2, msg2, genderok) '+
-					'VALUES (?,?,?,0,0,0,0,?)',
+					'VALUES (?,?,?,0,0,0,0,?) '+
+					'ON DUPLICATE KEY UPDATE starttime=VALUES(starttime)',
 					[id1,id2,d.getTime(),genderint],
 					function (err, results, fields) {
 		if(err) {
