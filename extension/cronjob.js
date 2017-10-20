@@ -1,5 +1,6 @@
 const co = require('../custom/const');
 const la = require('../custom/lang');
+const request = require('request');
 var tools;
 var sqlconn;
 var sendButtonMsg;
@@ -16,6 +17,13 @@ var everyMinute = function() {
   })
 }
 
+var every15mins = function() {
+  request({
+		url: 'http://cors-proxy.htmldriven.com/?url=https://'+co.APP_NAME+'.herokuapp.com/',
+		method: 'GET'
+	}, function(error, response, body) {})
+}
+
 var init = function(toolsObj, sqlconnObj, sendButtonMsgObj) {
   if (co.MAX_WAIT_TIME_MINUTES > 0) {
     tools = toolsObj;
@@ -23,6 +31,10 @@ var init = function(toolsObj, sqlconnObj, sendButtonMsgObj) {
     sendButtonMsg = sendButtonMsgObj;
     setInterval(everyMinute, 60000);
     setTimeout(everyMinute, 5000);
+  }
+
+  if (co.APP_NAME && co.KEEP_APP_ALWAYS_ON) {
+    setInterval(every15mins, 15*60000);
   }
 }
 

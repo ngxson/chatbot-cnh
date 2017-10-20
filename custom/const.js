@@ -8,6 +8,7 @@ module.exports = {
 	//HEROKU STUFFS
 	APP_NAME : '',
 	HEROKU_API_KEY : '',
+	KEEP_APP_ALWAYS_ON : false, // đổi thành true nếu đã thêm credit card vào heroku
 
 	//MYSQL SETUP
 	DB_CONFIG : {
