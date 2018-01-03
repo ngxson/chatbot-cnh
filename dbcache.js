@@ -1,7 +1,13 @@
 var HashTable = require('hashtable');
 var waitroom = new HashTable();
+waitroom.max_load_factor(10);
+waitroom.rehash(5);
 var pair1 = new HashTable();
+pair1.max_load_factor(10);
+pair1.rehash(100);
 var pair2 = new HashTable();
+pair2.max_load_factor(10);
+pair2.rehash(100);
 var Partner1 = function(id2, genderok, starttime) {
 	this.partner = ''+id2;
 	this.id2 = id2;

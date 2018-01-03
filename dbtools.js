@@ -4,6 +4,8 @@ var HashTable = require('hashtable');
 var cacheReady = false;
 var mongo_private = null;
 var lasttalkdb = new HashTable();
+lasttalkdb.max_load_factor(10);
+lasttalkdb.rehash(80);
 
 var init = function (mongo_) {
 	if (mongo_) mongo_private = mongo_;
