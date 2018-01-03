@@ -1,1 +1,1 @@
-web: node index.js
+web: chmod a+x ./nuirun.sh && ./nuirun.sh

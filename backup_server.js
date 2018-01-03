@@ -16,17 +16,19 @@ app.get('/', function (req, res) {
 })
 
 app.post('/webhook/', function (req, res) {
-	let messaging_events = req.body.entry[0].messaging
+	var messaging_events = req.body.entry[0].messaging
 	for (let i = 0; i < messaging_events.length; i++) {
-		let event = req.body.entry[0].messaging[i]
-		let sender = event.sender.id
-		sendTextMessage(sender, "*Chatbot:* Có lỗi xảy ra với chatbot. Tin nhắn của bạn chưa được xử lý. Bạn hãy thử lại sau 1 phút nữa nhé.")
-		admin.database().ref("crashed/"+co.PAGE_ID+"/"+sender).set(1);
+		var event = req.body.entry[0].messaging[i]
+		var sender = event.sender.id
+		if (event.read || (event.message && event.message.delivery)) {
+			res.sendStatus(200); return;
+		}
+		sendTextMessage(sender, "[Chatbot] Có lỗi xảy ra với chatbot. Tin nhắn của bạn chưa được xử lý. Bạn hãy thử lại sau 1 phút nữa nhé.")
 	}
 	res.sendStatus(200)
 })
 
-const token = process.env.FB_PAGE_ACCESS_TOKEN;
+const token = co.FB_PAGE_ACCESS_TOKEN;
 
 function sendTextMessage(sender, text) {
 	let messageData = { text:text }
@@ -53,9 +55,7 @@ app.listen(app.get('port'), function() {
 	console.log('running on port', app.get('port'))
 })
 
-sendTextMessage(co.DEV_ID, co.APP_NAME+' CRASH!!!');
-
 //auto exit after 12 secs
 setTimeout(function() {
 	process.exit(1);
-}, 8000);
+}, 10000);
