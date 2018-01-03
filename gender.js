@@ -12,9 +12,8 @@ var setGender = function (sqlconn, id, gender_str, callback) {
 		callback(-1, id);//no valid value
 		return;
 	}
-	sqlconn.conn.query('INSERT INTO gender (uid, gender) VALUES (?,?) '+
-					'ON DUPLICATE KEY UPDATE '+
-					'gender=VALUES(gender)', [id, genderid], function (error, results, fields) {
+	sqlconn.conn.collection('gender').update({uid:id}, {uid:id, gender:genderid},
+		{ upsert: true }, function (error, results, fields) {
 		if (error) {
 			callback(-2, id);//ERR writing to db
 			console.log(error);
@@ -25,7 +24,8 @@ var setGender = function (sqlconn, id, gender_str, callback) {
 };
 
 var getGender = function (sqlconn, id, callback, facebook, token) {
-	sqlconn.conn.query('SELECT uid,gender FROM gender WHERE uid='+id, function (error, results, fields) {
+	sqlconn.conn.collection('gender').find({uid:id})
+	.toArray(function (error, results, fields) {
 		if (error) {
 			//callback(-1);//ERR reading to db
 			callback(0);

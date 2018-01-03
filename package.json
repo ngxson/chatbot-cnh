@@ -9,16 +9,18 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "hashtable": "2.0.2",
-    "pidusage-fork": "0.1.2",
     "body-parser": "^1.15.0",
+    "cors": "2.8.4",
+    "crypto-js": "3.1.9-1",
     "express": "^4.13.4",
+    "express-x-hub": "^1.0.4",
+    "hashtable": "2.0.2",
     "heroku-client": "^3.0.2",
+    "mongodb": "^3.0.1",
+    "mysql": "2.15.0",
+    "pidusage-fork": "0.1.2",
     "request": "^2.71.0",
-	"underscore": "1.8.3",
-	"crypto-js": "3.1.9-1",
-	"mysql": "2.15.0",
-	"cors": "2.8.4"
+    "underscore": "1.8.3"
   },
   "engines": {
     "node": "6.11.1"

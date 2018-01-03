@@ -2,6 +2,7 @@ module.exports = {
 	DEBUG : false,
 
 	//FACEBOOK TOKEN
+	FB_APP_SECRET : '',
 	FB_PAGE_VERIFY_TOKEN : 'passsword_dang_yeu_nhat_qua_dat', // đặt 1 mã bất kỳ
 	FB_PAGE_ACCESS_TOKEN : '',
 
@@ -10,15 +11,8 @@ module.exports = {
 	HEROKU_API_KEY : '',
 	KEEP_APP_ALWAYS_ON : false, // đổi thành true nếu đã thêm credit card vào heroku
 
-	//MYSQL SETUP
-	DB_CONFIG : {
-		host     : '',
-		user     : '',
-		password : '',
-		database : '',
-		waitForConnection: true,
-		connectionLimit: 1
-	},
+	//MONGODB SETUP
+	DB_CONFIG_URI : '',
 
 	//ANALYTICS
 	HAS_POST_LOG : false,

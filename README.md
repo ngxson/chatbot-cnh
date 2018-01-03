@@ -11,13 +11,11 @@ Mình là Nui. Mình lập ra chatbot này với mục đích ban đầu là đ�
 
 Vì nó được làm từ lúc kinh nghiệm của mình còn ít ỏi, phong cách code sẽ khá xấu. Tuy nhiên, mình muốn tập trung nhiều vào việc tối ưu hóa, trong khi phải giảm tối đa chi phí hoạt động (thực tế mình chưa phải bỏ ra đồng nào để duy trì nó :smiley: ). Đồng thời mình cũng đã thử nghiệm 1 vài phương pháp thống kê thông qua dữ liệu thu được. Điều này rất ý nghĩa với mình vì nó giúp mình có 1 cái nhìn tổng quát hơn về nhu cầu của người sử dụng.
 
-Chatbot CNH bị đóng không phải do vấn đề về tài chính hay kỹ thuật. Chỉ là mình đang bị khá nhiều áp lực từ các công việc cá nhân. Ngoài ra, mình cũng muốn tìm xem liệu có ai khác (ít nhất là trong CNH) có thể thực sự hiểu và đảm nhiệm được chatbot không.
-
 Mình mong rằng với source code này, các bạn, không kể là học sinh CNH hay không, có thể tự tạo 1 chatbot hoàn hảo của riêng mình.
 
 Merci et bonne chance!
 
-P/S: Bạn có thể ghé thăm **website chính thức** của Chatbot CNH tại đây: [https://chatbotcnh.firebaseapp.com/](https://chatbotcnh.firebaseapp.com/)
+P/S: Bạn có thể ghé thăm **website chính thức** của Nui tại đây: [https://ngxson.com/](https://ngxson.com/)
 
 ### Tính năng
 
@@ -27,6 +25,7 @@ Ngoài tính năng nói chuyện ẩn danh mà hầu hết các chatbot cơ bả
 * Gửi ảnh chó/mèo bất kỳ khi gõ meow hoặc gauw
 * Nút báo cáo cho admin được đặt tại các vị trí cần thiết, tránh để người dùng sử dụng nút report của facebook => page dễ bị xóa
 * Các thông báo lỗi rõ ràng, người dùng dễ hiểu (ví dụ như inbox ko gửi được do "đối" chat đã block page/deactive facebook...)
+* Có giao diện cho admin quản lý
 * Tối ưu hóa trong hệ thống như:
   * Có cache để đỡ truy vấn SQL nhiều lần (các bạn dùng heroku hay c9 sẽ gặp vấn đề là server chính với server SQL ở xa nhau, độ trễ sẽ lớn. Vì vậy, có cache sẽ giúp giảm rất rất nhiều lượt query)
   * Cache sử dụng native c++ hashtable
@@ -54,11 +53,12 @@ Trong sơ đồ còn 1 vài phần mình chưa biểu diễn đc:
 * facebook.js: chứa tools để giao tiếp với facebook
 * extension/gifts.js: công cụ chọn ảnh chó/mèo random
 * extension/logger.js: công cụ lưu lại ID các cặp vào Google Form
-* dbsql.js: tools để giao tiếp với MySQL
+* extension/broadcast.js: công cụ gửi tin nhắn tới tất cả người dùng
+* extension/admin.js: công cụ giao tiếp với giao diện admin
+* extension/cronjob.js: cronjob tự động kick người dùng khỏi hàng chờ nếu phải chờ quá lâu
+* dbmongo.js: tools để giao tiếp với MongoDB
 * dbcache.js: tools để giao tiếp với cache
 
 ### Thanks to
 
 Mã nguồn của mình có dựa vào source của @jw84: [click here](https://github.com/jw84/messenger-bot-tutorial)
-
-Ngoài ra mình cũng gửi lời cảm ơn chân thành đến anh Nguyễn Kim Sơn vì đã tài trợ server đặt MySQL cho mình.

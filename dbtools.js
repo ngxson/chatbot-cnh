@@ -1,16 +1,16 @@
-const sql = require('./dbsql');
+const dbmongo = require('./dbmongo');
 const cache = require('./dbcache');
 var HashTable = require('hashtable');
 var cacheReady = false;
-var sqlconn_private = null;
+var mongo_private = null;
 var lasttalkdb = new HashTable();
 
-var init = function (sqlcon) {
-	if (sqlcon) sqlconn_private = sqlcon;
-	cache.fetchToCache(sqlconn_private, function(ok) {
+var init = function (mongo_) {
+	if (mongo_) mongo_private = mongo_;
+	cache.fetchToCache(mongo_private, function(ok) {
 		if (ok) {
 			cacheReady = true;
-			delete sqlconn_private;
+			delete mongo_private;
 		} else {
 			setTimeout(init, 10000);
 		}
@@ -19,66 +19,67 @@ var init = function (sqlcon) {
 
 module.exports = {
 	init: init,
-	cacheReady:cacheReady,
+	initMongo: dbmongo.init,
+	cacheReady: cacheReady,
 
-	writeToWaitRoom: function (sqlconn, id, gender) {
-		sql.writeToWaitRoom(sqlconn, id, gender);
+	writeToWaitRoom: function (mongo, id, gender) {
+		dbmongo.writeToWaitRoom(mongo, id, gender);
 		var d = new Date();
 		cache.wr_write(id, gender, d.getTime());
 	},
 
-	findInWaitRoom: function (sqlconn, id, callback) {
+	findInWaitRoom: function (mongo, id, callback) {
 		if (cacheReady) {
 			cache.wr_find(id, callback)
 		} else {
-			sql.findInWaitRoom(sqlconn, id, callback)
+			dbmongo.findInWaitRoom(mongo, id, callback)
 		}
 	},
 
-	deleteFromWaitRoom: function (sqlconn, id) {
-		sql.deleteFromWaitRoom(sqlconn, id);
+	deleteFromWaitRoom: function (mongo, id) {
+		dbmongo.deleteFromWaitRoom(mongo, id);
 		cache.wr_del(id);
 	},
 
-	getListWaitRoom: function (sqlconn, callback) {
+	getListWaitRoom: function (mongo, callback) {
 		if (cacheReady) {
 			cache.wr_read(callback);
 		} else {
-			sql.getListWaitRoom(sqlconn, callback);
+			dbmongo.getListWaitRoom(mongo, callback);
 		}
 	},
 
 	//chatroom tools
-	writeToChatRoom: function (sqlconn, fs, id1, id2, isWantedGender) {
-		sql.writeToChatRoom(sqlconn, fs, id1, id2, isWantedGender);
+	writeToChatRoom: function (mongo, fs, id1, id2, isWantedGender) {
+		dbmongo.writeToChatRoom(mongo, fs, id1, id2, isWantedGender);
 		var d = new Date();
 		cache.cr_write(id1, id2, isWantedGender, d.getTime());
 	},
 
 	//callback(id, haveToReview, role, data);
-	findPartnerChatRoom: function (sqlconn, id, callback) {
+	findPartnerChatRoom: function (mongo, id, callback) {
 		if (cacheReady) {
 			cache.cr_find(id, callback)
 		} else {
-			sql.findPartnerChatRoom(sqlconn, id, callback)
+			dbmongo.findPartnerChatRoom(mongo, id, callback)
 		}
 	},
 
-	deleteFromChatRoom: function (sqlconn, id, callback) {
+	deleteFromChatRoom: function (mongo, id, callback) {
 		if (cacheReady) {
-			sql.deleteFromChatRoom(sqlconn, id, function(){});
+			dbmongo.deleteFromChatRoom(mongo, id, function(){});
 			cache.cr_del(id, callback);
 		} else {
-			sql.deleteFromChatRoom(sqlconn, id, callback);
+			dbmongo.deleteFromChatRoom(mongo, id, callback);
 			cache.cr_del(id, function(){});
 		}
 	},
 
-	getListChatRoom: function (sqlconn, callback) {
+	getListChatRoom: function (mongo, callback) {
 		if (cacheReady) {
 			cache.cr_read(callback);
 		} else {
-			sql.getListChatRoom(sqlconn, callback)
+			dbmongo.getListChatRoom(mongo, callback)
 		}
 	},
 
