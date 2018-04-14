@@ -1,7 +1,7 @@
 
 <img src="https://raw.githubusercontent.com/ngxson/chatbot-cnh/master/readme/github_cover.png" width="100%">
 
-# Chatbot CNH - Version 4.0
+# Chatbot CNH - Version 4.1
 ---
 ### Lời nói đầu
 

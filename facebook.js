@@ -117,7 +117,8 @@ var sendFacebookApi = function (sender, receiver, messageData, data, dontSendErr
 			method: 'POST',
 			json: {
 				recipient: {id:receiver},
-				message: messageData,
+        message: messageData,
+        messaging_type: "NON_PROMOTIONAL_SUBSCRIPTION"
 			}
 		}, function(error, response, body) {
 			if (error) {
@@ -145,7 +146,8 @@ exports.sendSeenIndicator = function (receiver) {
     method: 'POST',
     json: {
       recipient: {id:receiver},
-      sender_action:"mark_seen"
+      sender_action:"mark_seen",
+      messaging_type: "NON_PROMOTIONAL_SUBSCRIPTION"
     }
   }, function(error, response, body) {})
 }
