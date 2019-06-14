@@ -5,6 +5,8 @@
 ---
 ### Lời nói đầu
 
+> **(15/06/2019) Lưu ý**: Do mình bận nên không có tgian duy trì dự án này nữa. Các bạn có thể dùng phiên bản của @hieplpvip tại đây: [https://github.com/ptnkchat/ptnkchat](https://github.com/ptnkchat/ptnkchat)
+
 Bonjour à tous,
 
 Mình là Nui. Mình lập ra chatbot này với mục đích ban đầu là để thử thách bản thân, cũng như giúp mọi người có 1 nơi lành mạnh để giải tỏa tinh thần.
